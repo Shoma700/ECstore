@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//ECfront
+Route::get('/', 'ECfrontController@front1');
+
+//ECback
+Route::get('/back', 'ECbackController@back1');
