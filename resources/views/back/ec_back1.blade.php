@@ -1,4 +1,4 @@
-@extends('layouts.ec_base.back1')
+@extends('layouts.ec_base_back1')
 
 @section('content')
 
