@@ -20,10 +20,15 @@ header {
   color: #777;
 }
 
+.text-title {
+  padding-left: 15px;
+}
+
 .header-navigation {
   width: 100%;
   background-color: #fff;
   padding: 20px 0;
+  margin-bottom: 5px;
 }
 
 .header-navigation:after {
@@ -42,5 +47,62 @@ header {
 .header-navigation li a {
   color: #333;
   text-decoration: none;
+}
+
+.left-contents {
+  width: 60%;
+  margin-right: 15px;
+  float: left;
+  background-color: #fff;
+  padding: 20px 0;
+}
+
+.right-contents {
+  width: 30%;
+  float: left;
+  background-color: #fff;
+  padding: 20px 0;
+}
+
+.product-list-area:after {
+  clear: both;
+  display: block;
+  content: " ";
+}
+
+.product-list {
+  width: 150px;
+  margin: 5px;
+  float: left;
+}
+
+.product-list:after {
+  clear: both;
+  display: block;
+  content: " ";
+}
+
+.product-image {
+  margin-bottom: 5px;
+  width: 150px;
+  height: 150px;
+  display: block;
+}
+
+.product-name {
+  text-align: center;
+}
+
+.product-price {
+  text-align: center;
+}
+
+.information-list {
+  list-style-type: none;
+  padding-left: 5px;
+}
+
+.information-list li {
+  margin-bottom: 5px;
 }
 
