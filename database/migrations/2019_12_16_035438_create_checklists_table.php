@@ -17,8 +17,9 @@ class CreateChecklistsTable extends Migration
             $table->bigIncrements('id');
             $table->date('ordered_date');
             $table->integer('order_id');
-            $table->integer('ordered_product_total_price');
+            $table->integer('ordered_total_price');
             $table->integer('customer_cd')->length(7)->nullable();
+            $table->integer('customer_name');
             $table->string('contact')->nullable();
             $table->date('contact_date')->nullable();
             $table->string('payment_confirmation')->nullable();
