@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <!--CSRF Token -->
-        {{-- 次の章で説明します --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
         {{-- 各ページごとにtitleタグを入れるために@yieldで開けて置きます。 --}}
@@ -32,7 +31,6 @@
             {{-- 画面上部に表示するナビゲーションバーです。 --}}
 
             {{-- ここまでナビゲーションバー --}}
-            
             <main class="py-4">
                 {{-- コンテンツをここに入れるため、＠yieldで開けて置きます。 --}}
                 @yield('content')

@@ -19,4 +19,7 @@
 Route::get('/', 'ECfrontController@front1');
 
 //ECback
-Route::get('/back', 'ECbackController@back1');
+Route::get('/back', 'ECbackController@back1')->middleware('auth');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
