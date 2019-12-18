@@ -27,69 +27,17 @@
                 </div>
                 <div class="card-contents">
                     <div class="product-list-area">
+                        @foreach($posts as $p_list)
                         <div class="product-list">
-                            <img src="#" class="product-image">
-                            <p class="product-name">product_1</p>
-                            <p class="product-price"> ---- ￥</p>
+                            <img src="{{ asset('/storage/app/public/b_ninja.jpg') }}" class="product-image">
+                            <p class="product-name">{{ mb_substr($p_list->product_name, 0, 12) }}</p>
+                            <p class="product-price">{{ $p_list->product_price }}￥</p>
                             <p><input class="num_text" type="text" name="quantity" rows="1">--数量</p>
                             <div>
                                 <h6><a href="#" class="btn-left btn btn-primary" role="button">カートへ</a></h6>
                             </div>
                         </div>
-                        <div class="product-list">
-                            <img src="#" class="product-image">
-                            <p class="product-name">product_2</p>
-                            <p class="product-price"> ---- ￥</p>
-                            <p><input class="num_text" type="text" name="quantity" rows="1">--数量</p>
-                            <div>
-                                <h6><a href="#" class="btn-left btn btn-primary" role="button">カートへ</a></h6>
-                            </div>
-                        </div>
-                        <div class="product-list">
-                            <img src="#" class="product-image">
-                            <p class="product-name">product_3</p>
-                            <p class="product-price"> ---- ￥</p>
-                            <p><input class="num_text" type="text" name="quantity" rows="1">--数量</p>
-                            <div>
-                                <h6><a href="#" class="btn-left btn btn-primary" role="button">カートへ</a></h6>
-                            </div>
-                        </div>
-                        <div class="product-list">
-                            <img src="#" class="product-image">
-                            <p class="product-name">product_4</p>
-                            <p class="product-price"> ---- ￥</p>
-                            <p><input class="num_text" type="text" name="quantity" rows="1">--数量</p>
-                            <div>
-                                <h6><a href="#" class="btn-left btn btn-primary" role="button">カートへ</a></h6>
-                            </div>
-                        </div>
-                        <div class="product-list">
-                            <img src="#" class="product-image">
-                            <p class="product-name">product_5</p>
-                            <p class="product-price"> ---- ￥</p>
-                            <p><input class="num_text" type="text" name="quantity" rows="1">--数量</p>
-                            <div>
-                                <h6><a href="#" class="btn-left btn btn-primary" role="button">カートへ</a></h6>
-                            </div>
-                        </div>
-                        <div class="product-list">
-                            <img src="#" class="product-image">
-                            <p class="product-name">product_6</p>
-                            <p class="product-price"> ---- ￥</p>
-                            <p><input class="num_text" type="text" name="quantity" rows="1">--数量</p>
-                            <div>
-                                <h6><a href="#" class="btn-left btn btn-primary" role="button">カートへ</a></h6>
-                            </div>
-                        </div>
-                        <div class="product-list">
-                            <img src="#" class="product-image">
-                            <p class="product-name">product_7</p>
-                            <p class="product-price"> ---- ￥</p>
-                            <p><input class="num_text" type="text" name="quantity" rows="1">--数量</p>
-                            <div>
-                                <h6><a href="#" class="btn-left btn btn-primary" role="button">カートへ</a></h6>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 {{--  --}}
