@@ -90,11 +90,19 @@ header {
 }
 
 .product-name {
-  text-align: center;
+  text-align: left;
 }
 
 .product-price {
-  text-align: center;
+  text-align: left;
+  margin-left: 10px;
+  float: left;
+}
+
+.num_text {
+  width: 25px;
+  margin-left: 20px;
+  float: left;
 }
 
 .information-list {
