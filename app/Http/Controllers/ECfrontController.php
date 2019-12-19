@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Product;
-
+use App\Cart;
 
 class ECfrontController extends Controller
 {
@@ -27,13 +27,19 @@ class ECfrontController extends Controller
         
         
         //カートへの移動
-        // $stock_product_cd = $request->stock_product_cd;
-        // //dd($stock_product_cd);
-        // $cart = Cart::find($$request->stock_product_cd);
-        // //dd($news);
-        // if (empty($news)) {
-        // abort(404);    
-        // }
+        //検索された商品コードの商品情報をproductsテーブルから取得する
+        
+        $search_product_cd = Product::find($request->search_product_cd);
+         if (empty($search_product_cd)) {
+         } else {
+        dump($request->get('search_product_cd'));
+        dump($request->get('search_product_quantity'));  
+        //abort(404);   
+        //dd($search_product_cd);
+        //dd($search_product_quantity);
+        $cart = new Cart;
+        //return redirect('front/ec_front1');
+        }
         
         return view('front.ec_front1', ['posts' => $posts]);
         // $posts = Product::all();

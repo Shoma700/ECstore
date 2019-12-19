@@ -122,6 +122,11 @@ header {
 
 .btn-left {
   margin-left: 30px;
+  font-size: 10px;
+}
+
+.btn-left2 {
+  margin-left: 30px;
 }
 
 .hover {

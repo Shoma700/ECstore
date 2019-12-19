@@ -35,10 +35,15 @@
                             <img src="{{ asset('storage/image/' . $p_list->product_image_path) }}" class="product-image">
                             <p class="product-name">{{ mb_substr($p_list->product_name, 0, 12) }}</p>
                             <p class="product-price">{{ $p_list->product_price }}￥</p>
-                            <p><input class="num_text" type="text" name="quantity" rows="1">--数量</p>
-                            <div>
-                                <h6><a href="#" class="btn-left btn btn-primary" role="button">カートへ</a></h6>
-                            </div>
+                            {{-- フォーム --}}
+                            <form action= method="get">
+                                <p><input class="num_text" type="text" name="search_product_quantity" rows="1">--数量</p>
+                                <div>
+                                    {{ csrf_field() }}
+                                    <h6><a href="{{ action('ECfrontController@front1', ['search_product_cd' => '0000001', 'search_product_quantity' => '1']) }}" class="btn-left btn btn-primary" role="button">カートへ追加</a></h6>
+                                </div>
+                            </form>
+                            {{-- ↑ ↑ ↑ --}}
                         </div>
                         @endforeach
                     </div>
@@ -52,6 +57,9 @@
             <div class="right-contents">
                 <div class="card-contents">
                     <h4 class="text-title">カート</h4>
+                </div>
+                <div>
+                    <h6><a href="#" class="btn-left2 btn btn-primary" role="button">注文</a></h6>
                 </div>
             </div>
         </div>
