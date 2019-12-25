@@ -20,9 +20,10 @@ class ECfrontController extends Controller
         $search_product_class = $request->search_product_class;
         // dd($search_product_class);
         if ($search_product_class != '') {
-            $posts = Product::where('product_class', $search_product_class)->get();
+            $posts = Product::where('product_class', $search_product_class)->paginate(5);
         } else {
-            $posts = Product::all();
+            //$posts = Product::all();
+            $posts = Product::paginate(5);
         }
         
         
@@ -35,10 +36,11 @@ class ECfrontController extends Controller
         dump($request->get('search_product_cd'));
         dump($request->get('search_product_quantity'));  
         //abort(404);   
-        //dd($search_product_cd);
-        //dd($search_product_quantity);
+        dd($search_product_cd);
+        dd($search_product_quantity);
         $cart = new Cart;
         //return redirect('front/ec_front1');
+        //$cart->save();
         }
         
         return view('front.ec_front1', ['posts' => $posts]);
