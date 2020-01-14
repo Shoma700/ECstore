@@ -38,12 +38,12 @@
                             <p class="product-price">{{ $p_list->product_price }}￥</p>
                             
                             {{-- フォーム1 --}}
-                            <form action= method="post">
+                            <form action="{{ action('ECfrontController@front2') }}" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="search_product_cd" rows="1" value="{{ $p_list->product_cd }}" >
                                 <p><input class="num_text" type="text" name="search_product_quantity" rows="1">--数量</p>
                                 <div>
                                     {{ csrf_field() }}
-                                    <h6><a href="{{ action('ECfrontController@front2', ['search_product_cd' => 'search_product_cd', 'search_product_quantity' => 'search_product_quantity']) }}" class="btn-left btn btn-primary" role="button">カートへ追加</a></h6>
+                                    <input type="submit" class="btn btn-primary" value="カートへ追加">
                                 </div>
                             </form>
                             {{-- ↑ ↑ ↑ --}}

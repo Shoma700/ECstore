@@ -12,12 +12,13 @@ Class Common_Function
         // dd($search_product_class);
         if ($search_product_class != '') {
             $posts = Product::where('product_class', $search_product_class)->paginate(5);
-            return (['posts' => $posts, 'search_product_class' => $search_product_class]);
+            //return (['posts' => $posts, 'search_product_class' => $search_product_class]);
         } else {
             //$posts = Product::all();
             $posts = Product::paginate(5);
-            return (['posts' => $posts, 'search_product_class' => $search_product_class]);
+            //return (['posts' => $posts, 'search_product_class' => $search_product_class]);
         }
+        return view('front.ec_front1', ['posts' => $posts, 'search_product_class' => $search_product_class]);
     }
     
 }
