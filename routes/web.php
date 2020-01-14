@@ -17,6 +17,7 @@
 
 //ECfront
 Route::get('/', 'ECfrontController@front1');
+Route::get('/cart', 'ECfrontController@front2');
 
 //ECback
 Route::get('/back', 'ECbackController@back1')->middleware('auth');

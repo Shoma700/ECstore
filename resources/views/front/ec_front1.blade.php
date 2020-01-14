@@ -30,24 +30,24 @@
                 </div>
                 <div class="card-contents">
                     <div class="product-list-area">
+                        
                         @foreach($posts as $p_list)
                         <div class="product-list">
                             <img src="{{ asset('storage/image/' . $p_list->product_image_path) }}" class="product-image">
                             <p class="product-name">{{ mb_substr($p_list->product_name, 0, 12) }}</p>
                             <p class="product-price">{{ $p_list->product_price }}￥</p>
+                            
                             {{-- フォーム1 --}}
-                            <form action= method="get">
-                                {{-- フォーム2 --}}
-                                <form action= method="post">
-                                    <p><input class="num_text" type="text" name="search_product_quantity" rows="1">--数量</p>
-                                    <div>
-                                        {{ csrf_field() }}
-                                        <h6><a href="{{ action('ECfrontController@front1', ['search_product_cd' => '0000002', 'search_product_quantity' => '1']) }}" class="btn-left btn btn-primary" role="button">カートへ追加</a></h6>
-                                    </div>
-                                </form>
-                                {{-- ↑ ↑ ↑ --}}
+                            <form action= method="post">
+                                <input type="hidden" name="search_product_cd" rows="1" value="{{ $p_list->product_cd }}" >
+                                <p><input class="num_text" type="text" name="search_product_quantity" rows="1">--数量</p>
+                                <div>
+                                    {{ csrf_field() }}
+                                    <h6><a href="{{ action('ECfrontController@front2', ['search_product_cd' => 'search_product_cd', 'search_product_quantity' => 'search_product_quantity']) }}" class="btn-left btn btn-primary" role="button">カートへ追加</a></h6>
+                                </div>
                             </form>
                             {{-- ↑ ↑ ↑ --}}
+                            
                         </div>
                         @endforeach
                     </div>
@@ -65,6 +65,7 @@
                 </div>
                 <div>
                     <h6><a href="#" class="btn-left2 btn btn-primary" role="button">注文</a></h6>
+                    
                 </div>
             </div>
         </div>

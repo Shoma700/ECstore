@@ -25,26 +25,35 @@ class ECfrontController extends Controller
             //$posts = Product::all();
             $posts = Product::paginate(5);
         }
+        return view('front.ec_front1', ['posts' => $posts, 'search_product_class' => $search_product_class]);
+    }    
         
+    public function front2(Request $request)
+    {
         
+        if ($search_product_class != '') {
+            $posts = Product::where('product_class', $search_product_class)->paginate(5);
+        } else {
+            //$posts = Product::all();
+            $posts = Product::paginate(5);
+        }
         //カートへの移動
         //検索された商品コードの商品情報をproductsテーブルから取得する
-        
-        $search_product_cd = Product::find($request->search_product_cd);
-         if (empty($search_product_cd)) {
-         } else {
-        dump($request->get('search_product_cd'));
-        dump($request->get('search_product_quantity'));  
-        //abort(404);   
-        dd($search_product_cd);
-        dd($search_product_quantity);
-        $cart = new Cart;
-        //return redirect('front/ec_front1');
-        //$cart->save();
-        }
-        
-        return view('front.ec_front1', ['posts' => $posts]);
-        // $posts = Product::all();
-        // return view('front.ec_front1', ['posts' => $posts]);
+        //$request->session()->put('search_product_cd',1);
+        // グローバルヘルパ使用
+        session(['search_product_cd' => 1, 'search_product_quantity' => 1]);
+        //dump(session());
+            //$search_product_result = Product::find($request->session()->put(search_product_cd,));
+            //if (empty($search_product_result)) {
+            //} else {
+            //dump($request->session()->get('search_product_cd'));
+            //dump($request->session()->get('search_product_quantity'));  
+            //$cart = new Cart;
+            //return redirect('front/ec_front1');
+            //$cart->save();
+            //}
+        return redirect('/');//, ['posts' => $posts]);
+            // $posts = Product::all();
+            // return view('front.ec_front1', ['posts' => $posts]);
     }
 }
