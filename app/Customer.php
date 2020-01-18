@@ -13,6 +13,7 @@ class Customer extends Model
         'customer_name' => 'required',
         'customer_postal_code' => 'required|alpha_num|max:7',
         'customer_address' => 'required',
-        'customer_mail' => 'required'
+        'customer_mail' => 'required',
+        'customer_tel' => 'required'
     );
 }

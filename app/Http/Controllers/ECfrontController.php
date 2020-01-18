@@ -98,9 +98,26 @@ class ECfrontController extends Controller
             // $posts = Product::all();
             // return view('front.ec_front1', ['posts' => $posts]);
     }
+    
     public function front3(Request $request)
     {
         //$group_result = self::group($request);
         return view('front.ec_front2');//, ['posts' => $group_result['posts'], 'search_product_class' => $group_result['search_product_class']]);
-    }   
+    }
+    
+    public function front4(Request $request)
+    {
+        ////バリデーション(エラー時は$errorに自動で格納され、リダイレクト)
+        // $this->validate($request, Customer::$rules);
+        // $customer = new Customer;
+        // $form = $request->get('form');
+        // unset($form['_token']);
+        // $customer->fill($form);
+        // $customer->save();s
+        
+        return view('front.ec_front3');
+    }
+    
+    
+    
 }

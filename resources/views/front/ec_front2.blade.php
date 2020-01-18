@@ -14,7 +14,7 @@
             <div class="row">
                 {{-- 左側 --}}
                 <div class="left-contents mx-auto">
-                    <form action="#" method="post" enctype="multipart/form-data">
+                    <form action="{{ action('ECfrontController@front4') }}" method="post" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-md-2" for="name">氏名</label>
                         </div>
@@ -56,6 +56,7 @@
                             </div>
                         </div>
                     {{ csrf_field() }}
+                    <button type="submit">注文確定</button>
                     </form>
                 </div>
                 {{-- 右側 --}}
