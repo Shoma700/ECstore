@@ -64,8 +64,7 @@
                     <h4 class="text-title">カート</h4>
                 </div>
                 <div>
-                    <h6><a href="#" class="btn-left2 btn btn-primary" role="button">注文</a></h6>
-                    
+                    <h6><a href="{{ action('ECfrontController@front3') }}" method="post" class="btn-left2 btn btn-primary" role="button">注文手続きへ</a></h6>
                 </div>
             </div>
         </div>

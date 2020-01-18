@@ -44,7 +44,9 @@ class ECfrontController extends Controller
         $search_product_quantity = intval($request->search_product_quantity);//商品数量
             dump("postされた商品数量: " .$search_product_quantity);//★
         //sessionに商品が含まれるかチェック
+        
         if($request->session()->exists($search_product_cd))
+        //if($request->session()->get($search_product_cd) == $search_product_cd
         {
             dump("↑この商品はすでにsession内にあったよ！");//★
             //既にsession内に商品CDがある場合
@@ -96,4 +98,9 @@ class ECfrontController extends Controller
             // $posts = Product::all();
             // return view('front.ec_front1', ['posts' => $posts]);
     }
+    public function front3(Request $request)
+    {
+        //$group_result = self::group($request);
+        return view('front.ec_front2');//, ['posts' => $group_result['posts'], 'search_product_class' => $group_result['search_product_class']]);
+    }   
 }
