@@ -5,7 +5,7 @@ header {
 }
 
 .container {
-  width: 920px;
+  width: 1700px;
   margin: 0 auto 40px auto;
   display: block;
   clear: both;
@@ -27,6 +27,9 @@ header {
 
 .text-title {
   padding-left: 15px;
+}
+.text-title2 {
+  padding-left: 10px;
 }
 
 .header-navigation {
@@ -55,7 +58,7 @@ header {
 }
 
 .left-contents {
-  width: 60%;
+  width: 55%;
   margin-right: 15px;
   float: left;
   background-color: #fff;
@@ -63,11 +66,23 @@ header {
 }
 
 .right-contents {
-  width: 30%;
+  width: 35%;
   float: left;
   background-color: #fff;
   padding: 20px 0;
 }
+.right-button1 {
+  font-size: x-small;
+  float: right;
+  margin-right: 20px;
+}
+.right-button2 {
+  float: right;
+  margin-right: 20px;
+}
+
+
+
 
 .product-list-area:after {
   clear: both;
