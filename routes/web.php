@@ -22,6 +22,7 @@ Route::post('/cart', 'ECfrontController@front2');
 Route::get('/form', 'ECfrontController@front3');
 Route::post('/form', 'ECfrontController@front3');
 
+
 Route::post('/orderd', 'ECfrontController@front4');
 
 //ECback
