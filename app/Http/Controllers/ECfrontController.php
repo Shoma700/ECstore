@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Product;
 use App\Cart;
+use App\Customer;
+
 //↓共通関数はこちら別クラス
 use App\libs\Common_Function;
 
 class ECfrontController extends Controller
 {
-    
     //クラスメソッドでもインスタンスメソッドでもない
     //ただの関数↓
     public function group($request){
@@ -44,36 +45,37 @@ class ECfrontController extends Controller
         //$request->session()->flush();
         
         $search_product_cd = $request->search_product_cd;//商品CD
-            dump("postされた商品CD: " . $search_product_cd);//★
+            //dump("postされた商品CD: " . $search_product_cd);//★
         $search_product_quantity = intval($request->search_product_quantity);//商品数量
-            dump("postされた商品数量: " . $search_product_quantity);//★
+            //dump("postされた商品数量: " . $search_product_quantity);//★
         
-        //if(session()->get("cart") != null)
-        //{
+        // if(session()->get("cart") == null)
+        // {
+        //     $request->session()->put('cart.');
+        // }
             //sessionに商品が含まれるかチェック
-            if(array_key_exists($search_product_cd,$request->session()->get("cart")))
+            if(array_key_exists($search_product_cd, $request->session()->get("cart")))
             {
-                dump("↑この商品はすでにsession内にあったよ！");//★
+                //dump("↑この商品はすでにsession内にあったよ！");//★
                 //既にsession内に商品CDがある場合
                 //合致するキーの値を取り出し、数量を合算する
                 $value = intval($request->session()->get('cart.' . $search_product_cd));
                 $value_plus = intval($value + $search_product_quantity);
-                dump("ちなみに数量は: " . $value . "あり");//★
-                dump("今回の数量: " . $search_product_quantity . "と合わせ");//★
-                dump("合計: " . $value_plus . "をsessionに格納する");//★
+                //dump("ちなみに数量は: " . $value . "あり");//★
+                //dump("今回の数量: " . $search_product_quantity . "と合わせ");//★
+                //dump("合計: " . $value_plus . "をsessionに格納する");//★
                     // 合致するキーのデータを一旦セッションから削除する
                     unset($request->session()->get("cart")->$search_product_cd);
                     //sessionに改めてキーと合算数量を追加する
                     $request->session()->put('cart.' . $search_product_cd, $value_plus);            
             }else{
                 //sessionに追加する(既存がもしあった場合は上書きされる)
-                dump("↑この商品はsession内に無かったので、新規追加するよ！");//★
+                //dump("↑この商品はsession内に無かったので、新規追加するよ！");//★
                 $request->session()->put('cart.' . $search_product_cd, $search_product_quantity);
             }
-                dump("↓↓ if判定はこう動きました・・・");
-                dump(array_key_exists($search_product_cd,$request->session()->get("cart")));
-            
-            dump(session()->get('cart'));
+                //dump("↓↓ if判定はこう動きました・・・");//★
+                //dump(array_key_exists($search_product_cd,$request->session()->get("cart")));//★
+            //dump(session()->get('cart'));//★
 
             //カート用数値
             $a = session()->get('cart');
@@ -86,16 +88,15 @@ class ECfrontController extends Controller
                 $totalPrice += $subTotalPrice;
                 //dump($subTotalPrice);
             }
-            dump("合計金額 :" . $totalPrice);
-            if(array_key_exists("",$request->session()->get("cart")))
-            {
-            array_shift($request->session()->get("cart"));
-            }
+            //dump("合計金額 :" . $totalPrice);//★
+            // if(array_key_exists("", $request->session()->get("cart")))
+            // {
+            // array_shift($request->session()->get("cart"));
+            // }
         //↓同Controller内の関数を使用する(self::関数名(引数))
         //↓関数から戻り値を受ける場合は変数に格納する
         $group_result = self::group($request);
         return back();
-        
         
         //return view('front.ec_front1', ['posts' => $group_result['posts'], 'search_product_class' => $group_result['search_product_class']]);
         //return view('front.ec_front1', ['posts' => $result_array[0], 'search_product_class' => $result_array[1]]);
@@ -117,25 +118,28 @@ class ECfrontController extends Controller
     public function front3(Request $request)
     {
         //$group_result = self::group($request);
-        return view('front.ec_front2');//, ['posts' => $group_result['posts'], 'search_product_class' => $group_result['search_product_class']]);
+        $posts2 = Product::all();
+        return view('front.ec_front2',['posts2' => $posts2]);//, ['posts' => $group_result['posts'], 'search_product_class' => $group_result['search_product_class']]);
     }
     
     public function front4(Request $request)
     {
-        ////バリデーション(エラー時は$errorに自動で格納され、リダイレクト)
-        // $this->validate($request, Customer::$rules);
-        // $customer = new Customer;
-        // $form = $request->get('form');
-        // unset($form['_token']);
-        // $customer->fill($form);
-        // $customer->save();s
+        $request['customer_cd'] = 1111111;//後で直そう
+        $this->validate($request, Customer::$rules);////バリデーション(エラー時は$errorsに自動で格納され、リダイレクト)
+        $form = $request->all();
+        unset($form['_token']);
+        //dump($form);
         
+        $customer = new Customer;
+        $customer->fill($form)->save();
         return view('front.ec_front3');
     }
     
-    public function delete1(Request $request)
+    public function delete(Request $request)
     {
-        return back();
+        dump($request);
+        //$request->session()->forget("del_product");
+        return view('front.ec_front1');
     }
     
     

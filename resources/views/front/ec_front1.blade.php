@@ -30,7 +30,6 @@
                 </div>
                 <div class="card-contents">
                     <div class="product-list-area">
-                        
                         @foreach($posts as $p_list)
                         <div class="product-list">
                             <img src="{{ asset('storage/image/' . $p_list->product_image_path) }}" class="product-image">
@@ -71,13 +70,19 @@
                         @foreach(session()->get('cart') as $product_cd => $quantity)
                             @foreach($posts2 as $aaa)
                                 @if($aaa->product_cd == $product_cd)
-                                    <p>
-                                        <label class="text-title2">{{ $aaa->product_name }}</label>
-                                        <label> : </label>
-                                        <label>{{ $quantity }}個</label>
-    
-                                        <hr style="border:1px dashed #000000;">
-                                    </p>
+                                    {{-- フォーム２ --}}
+                                    <form action="{{ 'ECfrontController@delete' }}" method="post" enctype="multipart/form-data">
+                                        <p>
+                                            <label type="hidden" name="del_product" value="{{ $aaa->product_cd }}" ></label>
+                                            <label class="text-title2">{{ $aaa->product_name }}</label>
+                                            <label> : </label>
+                                            <label>{{ $quantity }}個</label>
+                                            {{ csrf_field() }}
+                                            <input type="submit" class="btn-left2 btn btn-primary right-button1" value="削除">
+                                            <hr style="border:1px dashed #000000;">
+                                        </p>
+                                    </form>
+                                    {{-- ↑ ↑ ↑ --}}
                                     @php
                                         $totalprice += $aaa->product_price * $quantity;
                                     @endphp
@@ -90,7 +95,7 @@
                         <h4 class="text-title2">合計金額 : {{ $totalprice }} 円(税込)</h4>
                     </div>    
                     <div>
-                        <h6><a href="{{ action('ECfrontController@front3') }}" method="post" class="btn-left2 btn btn-primary right-button2" role="button">注文手続きへ</a></h6>
+                        <h6><a href="{{ action('ECfrontController@front3') }}" class="btn-left2 btn btn-primary right-button2" role="button">注文手続きへ</a></h6>
                     </div>
                 {{-- カート内空スキップ着地 --}}
                 @endif

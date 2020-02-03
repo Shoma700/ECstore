@@ -17,11 +17,12 @@
 
 //ECfront
 Route::get('/', 'ECfrontController@front1');
-Route::get('/cart', 'ECfrontController@front2');//？
+//Route::get('/cart', 'ECfrontController@front2');未使用
 Route::post('/cart', 'ECfrontController@front2');
-Route::get('/form', 'ECfrontController@front3');
-Route::post('/form', 'ECfrontController@front3');
+Route::post('/', 'ECfrontController@delete');
 
+Route::get('/form', 'ECfrontController@front3');
+//Route::post('/form', 'ECfrontController@front3');
 
 Route::post('/orderd', 'ECfrontController@front4');
 

@@ -12,7 +12,7 @@
             <a href="#" role="button">トップ画面へ</a>
             </div>
             <div>
-            <a href="#" role="button">津注文履歴へ</a>
+            <a href="#" role="button">注文履歴へ</a>
             </div>
         </div>
     </div>
