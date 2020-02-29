@@ -9,14 +9,14 @@
             </div>
             {{-- 商品分類で絞りこみ --}}
             <ul class="header-navigation">
-                <li class="hover"><a href="{{ action('ECfrontController@front1', ['search_product_class' => '']) }}">全て</a></li>
-                <li class="hover"><a href="{{ action('ECfrontController@front1', ['search_product_class' => 'デッキ']) }}">デッキ</a></li>
-                <li class="hover"><a href="{{ action('ECfrontController@front1', ['search_product_class' => 'トラック']) }}">トラック</a></li>
-                <li class="hover"><a href="{{ action('ECfrontController@front1', ['search_product_class' => 'ウィール']) }}">ウィール</a></li>
-                <li class="hover"><a href="{{ action('ECfrontController@front1', ['search_product_class' => 'ベアリング']) }}">ベアリング</a></li>
-                <li class="hover"><a href="{{ action('ECfrontController@front1', ['search_product_class' => 'メンテナンス']) }}">メンテナンス</a></li>
-                <li class="hover"><a href="{{ action('ECfrontController@front1', ['search_product_class' => 'シューズ']) }}">シューズ</a></li>
-                <li class="hover"><a href="{{ action('ECfrontController@front1', ['search_product_class' => 'その他']) }}">その他</a></li>
+                <li class="hover"><a href="{{ action('ECfrontController@index', ['search_product_class' => '']) }}">全て</a></li>
+                <li class="hover"><a href="{{ action('ECfrontController@index', ['search_product_class' => 'デッキ']) }}">デッキ</a></li>
+                <li class="hover"><a href="{{ action('ECfrontController@index', ['search_product_class' => 'トラック']) }}">トラック</a></li>
+                <li class="hover"><a href="{{ action('ECfrontController@index', ['search_product_class' => 'ウィール']) }}">ウィール</a></li>
+                <li class="hover"><a href="{{ action('ECfrontController@index', ['search_product_class' => 'ベアリング']) }}">ベアリング</a></li>
+                <li class="hover"><a href="{{ action('ECfrontController@index', ['search_product_class' => 'メンテナンス']) }}">メンテナンス</a></li>
+                <li class="hover"><a href="{{ action('ECfrontController@index', ['search_product_class' => 'シューズ']) }}">シューズ</a></li>
+                <li class="hover"><a href="{{ action('ECfrontController@index', ['search_product_class' => 'その他']) }}">その他</a></li>
             </ul>
             {{-- ↑ ↑ ↑ --}}
         </div>
@@ -37,7 +37,7 @@
                             <p class="product-price">￥{{ $p_list->product_price }}</p>
                             
                             {{-- フォーム1 --}}
-                            <form action="{{ action('ECfrontController@front2') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ action('ECfrontController@add_cart') }}" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="search_product_cd" rows="1" value="{{ $p_list->product_cd }}" >
                                 <p><input class="num_text" type="text" name="search_product_quantity" rows="1">--数量</p>
                                 <div>
@@ -95,7 +95,7 @@
                         <h4 class="text-title2">合計金額 : {{ $totalprice }} 円(税込)</h4>
                     </div>    
                     <div>
-                        <h6><a href="{{ action('ECfrontController@front3') }}" class="btn-left2 btn btn-primary right-button2" role="button">注文手続きへ</a></h6>
+                        <h6><a href="{{ action('ECfrontController@order_form') }}" class="btn-left2 btn btn-primary right-button2" role="button">注文手続きへ</a></h6>
                     </div>
                 {{-- カート内空スキップ着地 --}}
                 @endif

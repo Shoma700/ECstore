@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 use App\Product;
 use App\Cart;
 use App\Customer;
+
 
 //↓共通関数はこちら別クラス
 use App\libs\Common_Function;
@@ -27,7 +29,7 @@ class ECfrontController extends Controller
         return ['posts' => $posts,'posts2' => $posts2, 'search_product_class' => $search_product_class];
     }
 
-    public function front1(Request $request)
+    public function index(Request $request)
     {
         //$request->session()->flush();
         $request->session()->put('cart.');
@@ -35,7 +37,7 @@ class ECfrontController extends Controller
         return view('front.ec_front1', ['posts' => $group_result['posts'], 'posts2' => $group_result['posts2'], 'search_product_class' => $group_result['search_product_class']]);
     }
         
-    public function front2(Request $request)
+    public function add_cart(Request $request)
     {
         //カートへの移動(session)
         //フォームからpostされた商品情報
@@ -67,11 +69,21 @@ class ECfrontController extends Controller
                     // 合致するキーのデータを一旦セッションから削除する
                     unset($request->session()->get("cart")->$search_product_cd);
                     //sessionに改めてキーと合算数量を追加する
-                    $request->session()->put('cart.' . $search_product_cd, $value_plus);            
+                    $request->session()->put('cart.' . $search_product_cd, $value_plus);
+                    //$request->session()->get('cart')->forget('""');
+                    //dump($request->session()->get('cart')->has('""'));
+                    if ($exists = Session::exists('cart.' . '')) {
+                        $request->session()->forget('cart.' . '');
+                    }
+                    //dump($request->session()->get("cart"));
+                    
             }else{
                 //sessionに追加する(既存がもしあった場合は上書きされる)
                 //dump("↑この商品はsession内に無かったので、新規追加するよ！");//★
                 $request->session()->put('cart.' . $search_product_cd, $search_product_quantity);
+                if ($exists = Session::exists('cart.' . '')) {
+                    $request->session()->forget('cart.' . '');
+                }
             }
                 //dump("↓↓ if判定はこう動きました・・・");//★
                 //dump(array_key_exists($search_product_cd,$request->session()->get("cart")));//★
@@ -87,6 +99,7 @@ class ECfrontController extends Controller
                 $subTotalPrice = $c * $product_price;
                 $totalPrice += $subTotalPrice;
                 //dump($subTotalPrice);
+                $request->session()->put(['totalPrice' => $totalPrice]);
             }
             //dump("合計金額 :" . $totalPrice);//★
             // if(array_key_exists("", $request->session()->get("cart")))
@@ -115,14 +128,19 @@ class ECfrontController extends Controller
             // return view('front.ec_front1', ['posts' => $posts]);
     }
     
-    public function front3(Request $request)
+    public function order_form(Request $request)
     {
-        //$group_result = self::group($request);
+        //dump($request->session()->all());
+        if ($request->session()->get('totalPrice') == 0) {
+        //if ($exists = Session::exists('cart.' . '')) {
+        return back();
+        } else {
         $posts2 = Product::all();
         return view('front.ec_front2',['posts2' => $posts2]);//, ['posts' => $group_result['posts'], 'search_product_class' => $group_result['search_product_class']]);
+        }
     }
     
-    public function front4(Request $request)
+    public function order(Request $request)
     {
         $request['customer_cd'] = 1111111;//後で直そう
         $this->validate($request, Customer::$rules);////バリデーション(エラー時は$errorsに自動で格納され、リダイレクト)

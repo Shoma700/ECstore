@@ -8,7 +8,7 @@ class Cart extends Model
 {
     protected $guarded = array('id');
     //
-    public static $rures = array(
+    public static $rules = array(
         'product_cd' => 'required',
         'product_name' => 'required',
         'product_price' => 'required',

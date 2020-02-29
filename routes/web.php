@@ -16,18 +16,13 @@
 // });
 
 //ECfront
-Route::get('/', 'ECfrontController@front1');
-//Route::get('/cart', 'ECfrontController@front2');未使用
-Route::post('/cart', 'ECfrontController@front2');
+Route::get('/', 'ECfrontController@index');
+Route::post('/cart', 'ECfrontController@add_cart');
 Route::post('/', 'ECfrontController@delete');
-
-Route::get('/form', 'ECfrontController@front3');
-//Route::post('/form', 'ECfrontController@front3');
-
-Route::post('/orderd', 'ECfrontController@front4');
+Route::get('/form', 'ECfrontController@order_form');
+Route::post('/orderd', 'ECfrontController@order');
 
 //ECback
 Route::get('/back', 'ECbackController@back1')->middleware('auth');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

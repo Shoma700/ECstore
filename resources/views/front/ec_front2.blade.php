@@ -14,7 +14,7 @@
             <div class="row">
                 {{-- 左側 --}}
                 <div class="left-contents mx-auto">
-                    <form action="{{ action('ECfrontController@front4') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ action('ECfrontController@order') }}" method="post" enctype="multipart/form-data">
                         @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
