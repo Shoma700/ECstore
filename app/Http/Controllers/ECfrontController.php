@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 use App\Product;
 use App\Cart;
 use App\Customer;
-
+use App\Order_History;
 
 //↓共通関数はこちら別クラス
 use App\libs\Common_Function;
@@ -142,15 +143,44 @@ class ECfrontController extends Controller
     
     public function order(Request $request)
     {
-        $request['customer_cd'] = 1111111;//後で直そう
-        $this->validate($request, Customer::$rules);////バリデーション(エラー時は$errorsに自動で格納され、リダイレクト)
-        $form = $request->all();
-        unset($form['_token']);
-        //dump($form);
         
-        $customer = new Customer;
-        $customer->fill($form)->save();
-        return view('front.ec_front3');
+        // $request['customer_cd'] = 1111111;//後で直そう
+        // $this->validate($request, Customer::$rules);////バリデーション(エラー時は$errorsに自動で格納され、リダイレクト)
+        // $form = $request->all();
+        // unset($form['_token']);
+        // //dump($form);
+        // $customer = new Customer;
+        // $customer->fill($form)->save();
+        
+        if (DB::table('order_histories')->where('order_id')->exists()) {
+            $max_order_id = Order_History::max('order_id');
+            $order_id = $max_order_id + 1; 
+        } else {
+            $order_id = 1;
+        }
+        //$product_all = Product::all();
+        $order = new Order_History;
+        //$order = $request->session()->all();
+        //dump($product_all);
+        foreach ($request->session()->get('cart') as $key => $value) {
+            if ($key != "") {
+                dump($key);
+                dump($value);
+                //$order['order_id'] = $order_id;
+                //$order['customer_cd'] = 111111;//あとでなおそう
+                //$order['orderd_product_cd'] = $key; //★タイプミスordered
+                //$order['ordered_product_name'] = Product::where('product_cd', $key)->value('product_name');
+                //$order['ordered_product_quantity'] = $value;
+                //$order['product_price'] = $value * Product::where('product_cd', $key)->value('product_price');
+                //$order['ordered_product_total_price'] = $request->session()->get('totalPrice');
+                //$order['ordered_date'] = date("Y/m/d H:i:s");
+                dump($order);
+                $order->save();//できない…
+            }
+        }
+        //dump($request->session()->get('totalPrice'));
+        //return back();
+        //return view('front.ec_front3');
     }
     
     public function delete(Request $request)

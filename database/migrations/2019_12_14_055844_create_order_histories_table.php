@@ -16,8 +16,8 @@ class CreateOrderHistoriesTable extends Migration
         Schema::create('order_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('order_id');
-            $table->integer('customer_cd')->length(7)->nullable();
-            $table->integer('orderd_product_cd')->length(7);
+            $table->integer('customer_cd');
+            $table->integer('orderd_product_cd');
             $table->string('ordered_product_name');
             $table->integer('ordered_product_quantity');
             $table->integer('ordered_product_price');
